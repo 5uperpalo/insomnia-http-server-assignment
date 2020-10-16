@@ -17,7 +17,7 @@ Solution is packaged in the docker.
    * Gunicorn is configured to use threading (concurency in workers), see supervisord.conf "--threads", I did not have time/resources to test pseudo-thrads (gevent) - https://medium.com/building-the-system/gunicorn-3-means-of-concurrency-efbb547674b7 
   * Flask Restfull - REST API
 * I used Sphinx for documentation, see usage in section "Documentation"
-* I used jsonschema for input validation - Sphinx has issues with code that uses open(FILE) so I included the schema in code and in /pp/validation
+* I used jsonschema for input validation
 * I made health check according to microservices recommendations (memory, disk space, etc.) : https://microservices.io/patterns/observability/health-check-api.html
 * possible improvement in security could be done with HTTPBasicAuth + werkzeug.security(generate_password_hash, check_password_hash) + https
 

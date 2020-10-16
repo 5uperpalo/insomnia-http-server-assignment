@@ -1,0 +1,6 @@
+{
+    "type": "object",
+    "properties": {
+        "time": {"type": "integer", "minimum": 1}
+    }
+}

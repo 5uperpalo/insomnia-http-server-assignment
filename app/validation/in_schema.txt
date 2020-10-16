@@ -1,0 +1,6 @@
+{
+    "type": "object",
+    "properties": {
+        "timeout": {"type": "integer", "minimum": 1}
+    }
+}

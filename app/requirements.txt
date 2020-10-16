@@ -1,0 +1,12 @@
+Flask==1.1.2
+flask-restful==0.3.8
+gunicorn==20.0.4
+flask_profiler
+requests
+psutil
+jsonschema
+pytest
+pytest-cov
+pytest-flakes
+pytest-pep8
+pytest-pythonpath

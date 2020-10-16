@@ -18,7 +18,7 @@ sys.setrecursionlimit(1500)
 
 # -- Project information -----------------------------------------------------
 
-project = 'Exponea HTTP server assignment'
+project = 'Insomnia HTTP server assignment'
 copyright = '2020, Pavol Mulinka'
 author = 'Pavol Mulinka'
 

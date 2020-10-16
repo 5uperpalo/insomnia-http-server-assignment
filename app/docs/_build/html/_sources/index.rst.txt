@@ -1,4 +1,4 @@
-Welcome to Exponea's assignment documentation!
+Welcome to Insomnia's assignment documentation!
 ==============================================
 .. toctree::
    :maxdepth: 4
@@ -6,14 +6,14 @@ Welcome to Exponea's assignment documentation!
 
    main
    
-Exponea testing HTTP server REST API
-====================================
+Insomnia HTTP server assignment
+===============================
 .. automodule:: main
    :members:
 
 
-Exponea testing HTTP server Endpoint utils
-==========================================
+Insomnia HTTP server Endpoint
+=============================
 .. automodule:: src.endpoint_utils
    :members: 
 

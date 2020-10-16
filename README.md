@@ -16,11 +16,10 @@ Solution is packaged in the docker.
    * I used supervisord to manage multiple services in 1 docker (not needed in case you separate the services to containers)
    * Gunicorn is configured to use threading (concurency in workers), see supervisord.conf "--threads", I did not have time/resources to test pseudo-thrads (gevent) - https://medium.com/building-the-system/gunicorn-3-means-of-concurrency-efbb547674b7 
   * Flask Restfull - REST API
-    * Flask uses asyncio & aiohttp for concurrency/thread
 * I used Sphinx for documentation, see usage in section "Documentation"
 * I used jsonschema for input validation - Sphinx has issues with code that uses open(FILE) so I included the schema in code and in /pp/validation
 * I made health check according to microservices recommendations (memory, disk space, etc.) : https://microservices.io/patterns/observability/health-check-api.html
-* improve security with HTTPBasicAuth + werkzeug.security(generate_password_hash, check_password_hash) + https
+* possible improvement in security could be done with HTTPBasicAuth + werkzeug.security(generate_password_hash, check_password_hash) + https
 
 ## Docker
 
@@ -32,12 +31,6 @@ deploy_local.bat
 
 ## Usage
 
-### windows powershell
-```
-# endpoints
-curl -Method Get -ContentType 'application/json' http://localhost/api/health
-curl -Method Get -H @{'apikey' = 'test_key'} -ContentType 'application/json' http://localhost/api/wallet -Body '{"address": "TU7Qu3vRSufcetba8qa4CrJuqRY2Sc7TCQ" }'
-```
 ### bash
 ```
 # endpoints
@@ -50,9 +43,9 @@ curl --request GET --header "key: test_key" --header "Content-Type: application/
 ### Monitoring
 
 #### Number of request
-* Flask-profiler:
- * web: http://127.0.0.1:5000/flask-profiler/ 
- * as JSON: http://127.0.0.1:5000/flask-profiler/api/measurements?sort=elapsed,desc
+* Flask-profiler
+  * web: http://127.0.0.1:80/flask-profiler/ 
+  * as JSON: http://127.0.0.1:80/flask-profiler/api/measurements?sort=elapsed,desc
 
 ### Logs
 * Supervisord: /var/log/supervisor/supervisord.log

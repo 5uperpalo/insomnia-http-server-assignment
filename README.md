@@ -72,7 +72,8 @@ generate new documenation (app\docs):
 ```
 make html
 ```
-[HTTP server documentation](https://htmlpreview.github.io/?https://github.com/5uperpalo/insomnia-http-server-assignment/blob/master/app/docs/_build/html/index.html)
+[HTTP server documentation](https://htmlpreview.github.io/?https://github.com/5uperpalo/insomnia-http-server-assignment/blob/main/app/docs/_build/html/index.html)
+
 
 ## Testing
 Testing is done using PyTest module. Example tests are included in app/tests/test_example.py.

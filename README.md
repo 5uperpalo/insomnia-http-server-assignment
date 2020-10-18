@@ -23,7 +23,7 @@ Solution is packaged in the docker.
 * I used combination of Nginx web server, Gunicorn WSGI and Python Flask Restfull
   * Nginx + Gunicorn = possibility to scale with more docker containers, kubernetes, [docker-swarm](https://www.nginx.com/blog/docker-swarm-load-balancing-nginx-plus/), etc.
     * I used supervisord to manage multiple services in 1 docker (not needed in case you separate the services to containers)
-    * Gunicorn is configured to use threading (concurency in workers), see supervisord.conf "--threads", [I did not have time/resources to test pseudo-thrads (gevent)](https://medium.com/building-the-system/gunicorn-3-means-of-concurrency-efbb547674b7)
+    * Gunicorn is configured to use threading (concurency in workers), see supervisord.conf "--threads", I did not have time/resources to test [pseudo-threads (gevent)](https://medium.com/building-the-system/gunicorn-3-means-of-concurrency-efbb547674b7)
   * Flask Restfull - REST API
 * I used Sphinx for documentation, see usage in section "Documentation"
 * I used jsonschema for input validation

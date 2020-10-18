@@ -78,7 +78,7 @@ curl --request GET --header "key: test_key" --header "Content-Type: application/
 
 Automatic documentation is created from docstrings by sphinx.
 [I use Google Style Python Docstrings](https://www.sphinx-doc.org/en/1.7/ext/example_google.html) - take less space than [Numpy style](https://www.sphinx-doc.org/en/1.7/ext/example_numpy.html#example-numpy) and are much easier to read in code than [Sphinx Docstrigs](https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html).  
-HTML documenation is viewable on github at [HTTP server assignment documentation](https://htmlpreview.github.io/?https://github.com/5uperpalo/insomnia-http-server-assignment/blob/master/app/docs/_build/html/index.html) using [BitBucket HTML Preview](https://github.com/htmlpreview/htmlpreview.github.com).
+HTML documenation is viewable on github at [HTTP server assignment documentation](https://htmlpreview.github.io/?https://github.com/5uperpalo/insomnia-http-server-assignment/blob/main/app/docs/_build/html/index.html) using [BitBucket HTML Preview](https://github.com/htmlpreview/htmlpreview.github.com).
 
 ```(cmd)
 pip install sphinx

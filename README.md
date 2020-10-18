@@ -32,7 +32,7 @@ Solution is packaged in the docker.
 
 ### Docker
 
-To deploy the docker use either following script of commands in the Appendix section.
+To deploy the docker use either following script or commands in the Appendix section.
 
 ```(cmd)
 # deploy container locally

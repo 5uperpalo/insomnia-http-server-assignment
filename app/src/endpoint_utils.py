@@ -8,27 +8,21 @@ from requests.exceptions import Timeout, HTTPError, ConnectionError
 
 logger = logging.getLogger(__name__)
 
+
 def send_request(url, address):
-    """
-    Send request function.
+    """Send request function.
 
-    Parameters
-    ----------
-    address
-           wallet address
-    url
-       tron url
+    Args:
+        address(str): wallet address
+        url(str): tron url
 
-    Returns
-    ----------
-    dict
-       response
-
+    Returns:
+        dict: response from Tron API
     """
     try:
         response = requests.get(url + address)
         returned_data = response.json()
-        if returned_data["success"] == False:
+        if returned_data["success"] is False:
             raise ValueError
         validate(instance=returned_data, schema=cfg.server_response_schema)
         return returned_data
@@ -47,4 +41,4 @@ def send_request(url, address):
 
     except Exception:
         logger.info("error:", exc_info=True)
-        return {"message": "error"}        
+        return {"message": "error"}

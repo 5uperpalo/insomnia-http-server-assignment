@@ -161,48 +161,50 @@
 <dl class="py class">
 <dt id="main.HealthCheck">
 <em class="property">class </em><code class="sig-prename descclassname">main.</code><code class="sig-name descname">HealthCheck</code><a class="headerlink" href="#main.HealthCheck" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>/api/healtcheck - returns the health of the service, performs various checks, such as
-the status of the host, e.g. disk space, etc.
-application specific logic</p>
-</div></blockquote>
-<p>.</p>
-<blockquote>
-<div><p>none</p>
-<dl class="simple">
-<dt>json</dt><dd><p>dictrionary of values containing health of the container</p>
+<dd><p>/api/healtcheck - returns the health of the service, performs various checks, such as
+the status of the connections to the infrastructure services used by the service instance
+the status of the host, e.g. disk space
+application specific logic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>NA</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>values containing health of the container</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>JSON(dict)</p>
 </dd>
 </dl>
-</div></blockquote>
 </dd></dl>
 
 <dl class="py class">
 <dt id="main.TronWallet">
 <em class="property">class </em><code class="sig-prename descclassname">main.</code><code class="sig-name descname">TronWallet</code><a class="headerlink" href="#main.TronWallet" title="Permalink to this definition">¶</a></dt>
-<dd><p>/api/tronwallet - endpoint that returns status of your tron wallet.</p>
+<dd><p>/api/tronwallet - endpoint that returns status of your tron wallet</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>JSON</strong> (<em>dict</em>) – address</p>
+<dd class="field-odd"><p><strong>JSON</strong> (<em>dict</em>) – wallet address</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p<strong>JSON</strong> (<em>dict</em>) – wallet information</p>
+<dd class="field-even"><p>wallet information</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>json</p>
+<dd class="field-odd"><p>JSON(dict)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="main.check_postdata">
-<code class="sig-prename descclassname">main.</code><code class="sig-name descname">check_postdata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.check_postdata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check - if posted data is in valid json format</p>
+<dt id="main.check_inputdata">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">check_inputdata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.check_inputdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if input data is in valid json format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>request</strong></p>
+<dd class="field-odd"><p><strong>request</strong> – client HTTP GET request</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p<strong>dict</strong> (<em>server response</em>)</p>
+<dd class="field-even"><p>values inside HTTP GET(JSON) request</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>dict</p>
@@ -220,12 +222,12 @@ application specific logic</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>address</strong> – wallet address</p></li>
-<li><p><strong>url</strong> – tron url</p></li>
+<li><p><strong>address</strong> (<em>str</em>) – wallet address</p></li>
+<li><p><strong>url</strong> (<em>str</em>) – tron url</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>response</p>
+<dd class="field-even"><p>response from Tron API</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>dict</p>

@@ -7,7 +7,9 @@ from src.endpoint_utils import send_request
 import logging
 from logging.config import dictConfig
 import pdb
-import psutil, platform, datetime
+import psutil
+import platform
+import datetime
 import cfg
 import flask_profiler
 
@@ -17,17 +19,18 @@ logger = logging.getLogger(__name__)
 # initialize app and api
 app = Flask("InsomniaHTTP")
 app.config["DEBUG"] = True
-app.config["flask_profiler"] = {"enabled": app.config["DEBUG"],
-                                "storage": {
-                                    "engine": "sqlite"
-                                },
-                                "basicAuth":{
-                                    "enabled": True,
-                                    "username": "admin",
-                                    "password": "admin"
-                                },}
+app.config["flask_profiler"] = {
+    "enabled": app.config["DEBUG"],
+    "storage": {"engine": "sqlite"},
+    "basicAuth": {
+        "enabled": True,
+        "username": "admin",
+        "password": "admin"
+        },
+    }
 
 api = Api(app)
+
 
 # authentication
 # from https://coderwall.com/p/4qickw/require-an-api-key-for-a-route-in-flask-using-only-a-decorator
@@ -35,24 +38,21 @@ def require_appkey(view_function):
     @wraps(view_function)
     # the new, post-decoration function. Note *args and **kwargs here.
     def decorated_function(*args, **kwargs):
-        if request.headers.get("key") and request.headers.get("key") == cfg.API_key:
+        if request.headers.get("key") and request.headers.get("key") == cfg.API_key: # noqa
             return view_function(*args, **kwargs)
         else:
             abort(401)
     return decorated_function
 
 
-def check_postdata(request):
-    """
-    Check if posted data is in valid json format
+def check_inputdata(request):
+    """Check if input data is in valid json format
 
-    Parameters
-    ----------
-    request
+    Args:
+        request: client HTTP GET request
 
-    Returns
-    ----------
-    dict
+    Returns:
+        dict: values inside HTTP GET(JSON) request
 
     """
     if request.is_json is True:
@@ -62,62 +62,49 @@ def check_postdata(request):
     else:
         raise TypeError
 
-        
+
 class HealthCheck(Resource):
-    """
-    /api/healtcheck - returns the health of the service, performs various checks, such as
-    the status of the connections to the infrastructure services used by the service instance
-    the status of the host, e.g. disk space
-    application specific logic
-.
+    """/api/healtcheck - returns the health of the service, performs various
+    checks, such as the status of the connections to the infrastructure
+    services used by the service instance the status of the host, e.g. disk
+    space application specific logic.
 
-    Parameters
-    ----------
-    none
+    Args:
+        NA
 
-    Returns
-    ----------
-    json
-        array of dictionaries containing health of the container
-
+    Returns:
+        JSON(dict): values containing health of the container
     """
     def get(self):
         UsagePerCPU = psutil.cpu_percent(percpu=True)
         ActiveCPU = len(list(filter(lambda x: x >= 0, UsagePerCPU)))
-        return jsonify({"operation_memory_usage": psutil.virtual_memory()._asdict()["percent"],
-                        "disk_space_usage": psutil.disk_usage("/")._asdict()["percent"],
-                        "cpu_usage": psutil.cpu_percent(),
-                        "num_of_cores": psutil.cpu_count(),
-                        "num_of_active_cores ": ActiveCPU,
-                        "server_wake_time": (datetime.datetime.now() - datetime.datetime.fromtimestamp(psutil.boot_time())).total_seconds(),
-                        "free_operation_memory": psutil.virtual_memory()._asdict()["free"],
-                        "free_disk_space": psutil.disk_usage("/")._asdict()["free"],
-                        "os": [platform.system(), platform.version()]
-                        })
+        return jsonify({
+            "operation_memory_usage": psutil.virtual_memory()._asdict()["percent"], # noqa
+            "disk_space_usage": psutil.disk_usage("/")._asdict()["percent"],
+            "cpu_usage": psutil.cpu_percent(),
+            "num_of_cores": psutil.cpu_count(),
+            "num_of_active_cores ": ActiveCPU,
+            "server_wake_time": (datetime.datetime.now() - datetime.datetime.fromtimestamp(psutil.boot_time())).total_seconds(), # noqa
+            "free_operation_memory": psutil.virtual_memory()._asdict()["free"],
+            "free_disk_space": psutil.disk_usage("/")._asdict()["free"],
+            "os": [platform.system(), platform.version()]
+            })
 
 
 class TronWallet(Resource):
-    """
-    /api/tronwallet - returns the first successful response that returns from
-    Exponea testing HTTP server. If timeout is reached before any
-    successful response was received, the endpoint should return an error.
+    """/api/tronwallet - endpoint that returns status of your tron wallet
 
-    Parameters
-    ----------
-    JSON : dict
-        timeout
+    Args:
+        JSON(dict): wallet address
 
-    Returns
-    ----------
-    json
-        array containing first response time
-
+    Returns:
+        JSON(dict): wallet information
     """
 
     @require_appkey
     def get(self):
         try:
-            posted_data = check_postdata(request)
+            posted_data = check_inputdata(request)
             result = send_request(cfg.tron_url, posted_data["address"])
             return jsonify(result)
 
@@ -133,6 +120,7 @@ class TronWallet(Resource):
             logger.info("error:", exc_info=True)
             return jsonify({"message": "error"})
     pass
+
 
 api.add_resource(HealthCheck, "/api/health")
 api.add_resource(TronWallet, "/api/wallet")

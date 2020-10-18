@@ -54,9 +54,9 @@ logging_config = {
             "propagate": False
             },
         "root": {
-        "handlers": ["stream", "file"],
-        "level": logging.INFO,
-        "propagate": False
-        },
-    }        
-}
+            "handlers": ["stream", "file"],
+            "level": logging.INFO,
+            "propagate": False
+            },
+        }
+    }
